@@ -2,7 +2,7 @@ import requests
 from datetime import datetime, timedelta
 from twilio.rest import Client
 
-# Constants (replace these with your actual API keys)
+# API Keys + Information
 GOOGLE_MAPS_API_KEY = 'YOUR_GOOGLE_MAPS_API_KEY'
 TWILIO_ACCOUNT_SID = 'YOUR_TWILIO_ACCOUNT_SID'
 TWILIO_AUTH_TOKEN = 'YOUR_TWILIO_AUTH_TOKEN'
@@ -11,10 +11,9 @@ TWILIO_PHONE_NUMBER = 'YOUR_TWILIO_PHONE_NUMBER'
 def get_route_info(origin, destination):
     """
     Fetch optimal route and traffic information between origin and destination using Google Maps API.
-    Returns:
-        dict: Information including duration, traffic delay, and best route.
     """
     url = 'https://maps.googleapis.com/maps/api/directions/json'
+    
     params = {
         'origin': origin,
         'destination': destination,
@@ -79,10 +78,10 @@ def eta_projector(origin, destination, desired_arrival_time, recipient_phone):
     # Send notification with all details
     send_eta_notification(route_info, departure_time, recipient_phone)
 
-# Example usage
+# Example 
 origin_address = "123 Main St, Albany, New York"
 destination_address = "456 Elm St, New York City, New York"
-desired_arrival = datetime.now() + timedelta(hours=2)  # Desired arrival in 2 hours
+desired_arrival = datetime.now() + timedelta(hours=2)  # Sets your desired arrival (ex. 2hrs)
 recipient_phone_number = "+1234567890"
 
 eta_projector(origin_address, destination_address, desired_arrival, recipient_phone_number)
